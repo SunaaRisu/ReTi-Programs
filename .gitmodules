@@ -1,0 +1,3 @@
+[submodule "reticode"]
+	path = reticode
+	url = https://github.com/arminbiere/reticode.git
