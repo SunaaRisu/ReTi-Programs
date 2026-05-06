@@ -1,66 +1,69 @@
-; Check if x and/or y is 0 and return 0 or the variable that is not 0.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;   Check if x and/or y is 0 and return 0 or the variable that is not 0.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-; Check if x and y are 0 by adding them together and checking for 0.
+;;;   Check if x and y are 0 by adding them together and checking for 0.
 LOAD ACC 40
 ADD ACC 41
-JUMP!= 3 ;    Jump to Check of y.
-STORE 42 ;    Store 0 as result if both x and y are 0.
-JUMP 1000 ;   Jump to the end of the Program.
+JUMP!= 3 ;      Jump to Check of y.
+STORE 42 ;      Store 0 as result if both x and y are 0.
+JUMP 1000 ;     Jump to the end of the Program.
 
-; Check y first for efficiency.
+;;;   Check y first for efficiency.
 LOAD ACC 41
-JUMP!= 4 ;   Jump to Check of x.
+JUMP!= 4 ;      Jump to Check of x.
 LOAD ACC 40
-STORE 42 ;    Store x as result if y is 0.
-JUMP 1000 ;   Jump to the end of the Program.
+STORE 42 ;      Store x as result if y is 0.
+JUMP 1000 ;     Jump to the end of the Program.
 
-; Check x.
+;;;   Check x.
 LOAD ACC 40
-JUMP!= 13 ;  Jump to Start of Algorithm.
+JUMP!= 13 ;     Jump to Start of Algorithm.
 LOAD ACC 41
-STORE 42 ;    Store y as result if x is 0.
-JUMP 1000 ;   Jump to the end of the Program.
+STORE 42 ;      Store y as result if x is 0.
+JUMP 1000 ;     Jump to the end of the Program.
 
 
-
-; Modulo Function
-
-; Calculates the Modulo from S(0) as x and S(1) as y.
-; Stores the result in S(2) and jumps back to the Point it lefts by jumping to the value stored in S(3).
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;   Modulo Function
+;;;
+;;;   Calculates the Modulo from S(0) as x and S(1) as y.
+;;;   Stores the result in S(2) and jumps back to the Point it lefts by jumping to the value stored in S(3).
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 LOAD ACC 0
 
-; While-Loop with the Condition (result >= y).
+;;;   While-Loop with the Condition (result >= y).
 SUB ACC 1
-JUMP= 4 ;     Break the While-Loop if Modulo is 0.
-JUMP< 2 ;     Break the While-Loop if Modulo is less than 0.
-JUMP -3 ;     Repeat Loop.
+JUMP= 4 ;       Break the While-Loop if Modulo is 0.
+JUMP< 2 ;       Break the While-Loop if Modulo is less than 0.
+JUMP -3 ;       Repeat Loop.
 
-ADD ACC 1 ;   Undo last substraction.
-STORE 2 ;     Store result.
+ADD ACC 1 ;     Undo last substraction if Modulo is less than 0.
+STORE 2 ;       Store result.
 
-;  Load the Point we left from S(3) and set PC to it.
+;;;   Load the Point we left from S(3) and set PC to it to jump back.
 LOAD ACC 3
 MOVE ACC PC
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;   Euclidean Algorithm
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Euclidean algorithm.
-
-LOAD ACC 40 ;   Setup Modulo x
+LOAD ACC 40 ;   Setup Modulo x.
 STORE 0
-LOAD ACC 41 ;   Setup Modulo y
+LOAD ACC 41 ;   Setup Modulo y.
 STORE 1
-LOADI ACC 31 ;  Set PC after Modulo
+LOADI ACC 31 ;  Set PC to jump back after Modulo.
 STORE 3
-JUMP -15 ;      Jump into Modulo Function
+JUMP -15 ;      Jump into Modulo Function.
 
-LOAD ACC 41 ;   Move y to x
+LOAD ACC 41 ;   Move y to x.
 STORE 40
-LOAD ACC 2 ;    Move Modulo Result to y
+LOAD ACC 2 ;    Move Modulo Result to y.
 STORE 41
-JUMP!= -11 ;    Loop if y is no 0
+JUMP!= -11 ;    Loop if y is not 0.
 
 LOAD ACC 40;    Store Result in S(42)
 STORE 42
