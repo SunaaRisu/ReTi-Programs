@@ -1,6 +1,57 @@
+; Check if x and/or y is 0 and return 0 or the variable that is not 0.
+
+
+; Check if x and y are 0 by adding them together and checking for 0. (PC 1)
 LOAD ACC 40
-STORE 42
+ADD ACC 41
+JUMP!= 3 ;    Jump to Check of y.
+STORE 42 ;    Store 0 as result if both x and y are 0.
+JUMP 1000 ;   Jump to the end of the Program.
+
+; Check y first for efficiency. (PC 7)
 LOAD ACC 41
-STORE 40
-LOAD ACC 42
-STORE 41
+JUMP!= 4 ;   Jump to Check of x.
+LOAD ACC 40
+STORE 42 ;    Store x as result if y is 0.
+JUMP 1000 ;   Jump to the end of the Program.
+
+; Check x. (PC 12)
+LOAD ACC 40
+JUMP!= 13 ;  Jump to Start of Algorithm.
+LOAD ACC 41
+STORE 42 ;    Store y as result if x is 0.
+JUMP 1000 ;   Jump to the end of the Program.
+
+
+
+; Modulo Function (PC 17)
+
+; Calculates the Modulo from S(0) as x and S(1) as y.
+; Stores the result in S(2) and jumps back to the Point it lefts by jumping to the value stored in S(3).
+
+LOAD ACC 0
+
+; While-Loop with the Condition (result >= y).
+SUB ACC 1
+JUMP= 4 ;     Break the While-Loop if Modulo is 0.
+JUMP< 2 ;     Break the While-Loop if Modulo is less than 0.
+JUMP -3 ;     Repeat Loop.
+
+ADD ACC 1 ;   Undo last substraction.
+STORE 2 ;     Store result.
+
+;  Load the Point we left from S(3) and set PC to it.
+LOAD ACC 3
+MOVE ACC PC
+
+
+
+; Euclidean algorithm.
+
+LOAD ACC 40
+STORE 0
+LOAD ACC 41
+STORE 1
+LOADI ACC 6700
+STORE 3
+JUMP -15
