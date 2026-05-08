@@ -85,5 +85,3 @@ JUMP -14 ;      Repeat while-loop.
 
 LOAD ACC 32
 STORE 33 ;      Store s(n) in S(33).
-
-JUMP 1000 ;     Jump to the end of the Program.
